@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
 public class PlayerController : MonoBehaviour { 
 
     //Player Movement Variables
@@ -15,17 +14,12 @@ public class PlayerController : MonoBehaviour {
     public float groundCheckRadius;
     public LayerMask whatIsGround;
 
-=======
-public class PlayerController : MonoBehaviour
-{
->>>>>>> master
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-<<<<<<< HEAD
     private void FixedUpdate()
     {
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
@@ -47,16 +41,16 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+
+        if (GetComponent<Rigidbody2D>().velocity.x > 0)
+            transform.localScale = new Vector3(5f, 5f, 1f);
+
+        else if (GetComponent<Rigidbody2D>().velocity.x < 0) ;
+        transform.localScale = new Vector3(-5f, 5f, 1f);
     }
 
     void Jump()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x,jumpHeight);
-=======
-    // Update is called once per frame
-    void Update()
-    {
-        
->>>>>>> master
     }
 }
