@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class CoinPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public int coinValue;
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if(other.tag == "Player")
+        {
+            print("You've collect the coin! idiot");
+
+            ScoreManager.AddPoints(coinValue);
+
+            Destroy(gameObject);
+        }
     }
-}
+}    
