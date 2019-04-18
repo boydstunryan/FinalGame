@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class KillPlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public LevelManager levelManager;
+
     void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.name == "Player")
+       if(other.name == "Player")
         {
             levelManager.RespawnPlayer();
         }
