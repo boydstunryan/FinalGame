@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, timeOut);
     }
 
-    void Update()
+    private void Update()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(speed, GetComponent<Rigidbody2D>().velocity.y);
 
@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour
 
         Destroy(gameObject);
     }
-    void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         print("Hitting Collider!"+ other.gameObject);
         Instantiate(projectileParticle, transform.position, transform.rotation);

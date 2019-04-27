@@ -8,14 +8,14 @@ public class ScoreManager : MonoBehaviour
 
     private Text scoreText;
 
-    void Start()
+    private void Start()
     {
         scoreText = GetComponent<Text>();
 
         score = 0;
     }
 
-    void Update()
+    private void Update()
     {
         if (score < 0)
             score = 0;

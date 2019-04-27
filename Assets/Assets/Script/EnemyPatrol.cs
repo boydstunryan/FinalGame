@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
@@ -14,7 +15,7 @@ public class EnemyPatrol : MonoBehaviour
     private bool notAtEdge;
     public Transform edgeCheck;
 
-    void Update()
+    private void Update()
     {
         notAtEdge = Physics2D.OverlapCircle(edgeCheck.position, wallCheckRadius, whatIsWall);
 
@@ -23,6 +24,11 @@ public class EnemyPatrol : MonoBehaviour
         if (hittingWall || !notAtEdge)
         {
             moveRight = !moveRight;
+        }
+
+        if (moveRight) {
+            transform.localScale = new Vector3(-10f, 10f, 1f);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
 
         if (moveRight)

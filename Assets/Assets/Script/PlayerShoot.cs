@@ -8,7 +8,7 @@ public class PlayerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        projectile = Resources.Load("Prefabs/sword") as GameObject;
+        projectile = Resources.Load("Prefabs/Projectile") as GameObject;
     }
 
     // Update is called once per frame

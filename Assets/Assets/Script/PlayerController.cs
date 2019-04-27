@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour { 
@@ -9,12 +10,11 @@ public class PlayerController : MonoBehaviour {
     private bool doubleJump;
 
     //Player grounded variables
+    private bool grounded;
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask whatIsGround;
-    private bool grounded;
 
-    //Non-Slide player
     private float moveVelocity;
 
     public Animator animator; 
@@ -22,11 +22,10 @@ public class PlayerController : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        animator.SetBool("isWalking", false);
-        animator.SetBool("isJumping", false);
+        
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
@@ -47,18 +46,17 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("isJumping", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)&& !doubleJump && !grounded)
+        if (Input.GetKeyDown(KeyCode.Space) && !doubleJump && !grounded)
         {
             Jump();
             doubleJump = true;
         }
 
-        //Non Slide Player
         moveVelocity = 0f;
 
         if (Input.GetKey(KeyCode.D))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            //GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             moveVelocity = moveSpeed;
             animator.SetBool("isWalking", true);
         }
@@ -67,9 +65,9 @@ public class PlayerController : MonoBehaviour {
         {
             animator.SetBool("isWalking",false);
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent <Rigidbody2D>().velocity.y);
+          //GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent <Rigidbody2D>().velocity.y);
             moveVelocity = -moveSpeed;
             animator.SetBool("isWalking", true);
         }
@@ -79,18 +77,20 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("isWalking", false);
         }
 
-        GetComponent<Rigidbody2D>().velocity = new Vector2(moveVelocity, GetComponent<Rigidbody2D>().velocity.y);
+        if(Input.GetKeyDown(KeyCode.W) && grounded)
+        {
+            Jump();
+        }
 
         if (GetComponent<Rigidbody2D>().velocity.x > 0)
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(5f, 5f, 1f);
 
         else if (GetComponent<Rigidbody2D>().velocity.x < 0) ;
-        transform.localScale = new Vector3(-1f, 1f, 1f);
+        transform.localScale = new Vector3(-5f, 5f, 1f);
     }
 
-    public void Jump()
+    void Jump()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x,jumpHeight);
-        animator.SetBool("isJumping", true);
     }
 }
